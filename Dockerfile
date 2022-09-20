@@ -2,6 +2,7 @@ FROM debian:bullseye
 
 # install Octopus 11.4 on Debian implimented from fangohr/octopus-in-spack
 
+######### Octopus Setup #########
 # Convenience tools (up to emacs)
 # Libraries that octopus needs (up to procps)
 # and optional dependencies (starting from libnetcdf-dev)
@@ -47,5 +48,10 @@ USER root
 RUN mkdir /io
 USER user
 WORKDIR /io
-
+######### Postopus Setup #########
+USER root
+RUN apt-get -y update && apt-get -y install python3 python3-pip
+USER user
+RUN pip install git+https://gitlab.com/octopus-code/postopus.git jupyterlab
+EXPOSE 8888
 CMD bash -l
