@@ -35,7 +35,7 @@ RUN octopus --version
 # RUN make check-short
 
 RUN mkdir -p /home/user/octopus-examples
-COPY examples /home/user/octopus-examples
+COPY --chown=user:user examples /home/user/octopus-examples
 
 # Instead of tests, run two short examples
 RUN cd /home/user/octopus-examples/h-atom && octopus
@@ -43,7 +43,9 @@ RUN cd /home/user/octopus-examples/he && octopus
 RUN cd /home/user/octopus-examples/recipe && octopus
 
 # offer directory for mounting container
+USER root
 RUN mkdir /io
+USER user
 WORKDIR /io
 
 CMD bash -l
