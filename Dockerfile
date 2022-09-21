@@ -10,12 +10,14 @@ RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
     autoconf libtool git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential procps \
     libnetcdff-dev libetsf-io-dev libspfft-dev libnlopt-dev libyaml-dev libgmp-dev likwid libmpfr-dev libboost-dev \
     && rm -rf /var/lib/apt/lists/*
-RUN groupadd cfel -g 3512
+# Mimic the host uid and gid from host to container to enable write support to mounted volumes
+RUN groupadd cfel -g 3512 # group for CFEL
 RUN useradd karnada --create-home --shell /bin/bash -g 3512 -u 52351
 USER karnada
+
+# Build Octopus
 WORKDIR /home/karnada
 RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=11.4/octopus-11.4.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
-
 WORKDIR /home/karnada/octopus-11.4
 RUN autoreconf -i
 RUN ./configure
@@ -43,13 +45,6 @@ RUN cd /home/karnada/octopus-examples/h-atom && octopus
 RUN cd /home/karnada/octopus-examples/he && octopus
 RUN cd /home/karnada/octopus-examples/recipe && octopus
 
-# offer directory for mounting container
-# USER root
-# RUN mkdir /io
-# RUN chown -R karnada:karnada /io
-
-# USER karnada
-# WORKDIR /io
 ######### Postopus Setup #########
 USER root
 RUN apt-get -y update && apt-get -y install python3 python3-pip
@@ -57,8 +52,10 @@ USER karnada
 RUN pip install git+https://gitlab.com/octopus-code/postopus.git jupyterlab
 EXPOSE 8888
 
+# Mount the host directory containing the  src as a volume in the container
 RUN mkdir -p /home/karnada/io
 USER root
 RUN chown -R karnada:cfel /home/karnada/io
 USER karnada
+
 CMD bash -l
