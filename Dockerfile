@@ -49,13 +49,16 @@ RUN cd /home/karnada/octopus-examples/recipe && octopus
 USER root
 RUN apt-get -y update && apt-get -y install python3 python3-pip
 USER karnada
-RUN pip install git+https://gitlab.com/octopus-code/postopus.git jupyterlab
+RUN pip install jupyterlab
 EXPOSE 8888
 
 # Mount the host directory containing the  src as a volume in the container
 RUN mkdir -p /home/karnada/io
 USER root
 RUN chown -R karnada:cfel /home/karnada/io
+# required to solve ImportError: libGL.so.1: cannot open shared object file: No such file or directory
+RUN apt-get install ffmpeg libsm6 libxext6  -y  
 USER karnada
-
+RUN pip install git+https://gitlab.com/octopus-code/postopus.git 
+# RUN jupyter lab --LabApp.token='' --ip=${HOSTNAME}
 CMD bash -l
