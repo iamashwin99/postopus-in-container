@@ -60,5 +60,7 @@ RUN chown -R karnada:cfel /home/karnada/io
 RUN apt-get install ffmpeg libsm6 libxext6  -y  
 USER karnada
 RUN pip install git+https://gitlab.com/octopus-code/postopus.git 
+RUN pip install "holoviews[recommended]"
+
 # RUN jupyter lab --LabApp.token='' --ip=${HOSTNAME}
 CMD bash -l
