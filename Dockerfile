@@ -10,6 +10,7 @@ RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
     autoconf libtool git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential procps \
     libnetcdff-dev libetsf-io-dev libspfft-dev libnlopt-dev libyaml-dev libgmp-dev likwid libmpfr-dev libboost-dev \
     && rm -rf /var/lib/apt/lists/*
+
 # Mimic the host uid and gid from host to container to enable write support to mounted volumes
 RUN groupadd cfel -g 3512 # group for CFEL
 RUN useradd karnada --create-home --shell /bin/bash -g 3512 -u 52351
@@ -62,5 +63,5 @@ USER karnada
 RUN pip install git+https://gitlab.com/octopus-code/postopus.git 
 RUN pip install "holoviews[recommended]"
 
-# RUN jupyter lab --LabApp.token='' --ip=${HOSTNAME}
+# RUN jupyter lab --LabApp.token='' --ip=${HOSTNAME} > /dev/null 2>&1 &
 CMD bash -l
