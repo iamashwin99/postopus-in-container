@@ -63,5 +63,5 @@ USER karnada
 RUN pip install git+https://gitlab.com/octopus-code/postopus.git 
 RUN pip install "holoviews[recommended]"
 
-# RUN jupyter lab --LabApp.token='' --ip=${HOSTNAME} > /dev/null 2>&1 &
+# RUN jupyter lab --LabApp.token='' --ip=${HOSTNAME} > /dev/null 2>&1 &  disown
 CMD bash -l

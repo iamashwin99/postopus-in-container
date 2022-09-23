@@ -1,5 +1,5 @@
-CalculationMode = gs
-#CalculationMode = td
+# CalculationMode = gs
+CalculationMode = td
 FromScratch = yes
 
 Radius = 3.5*angstrom
