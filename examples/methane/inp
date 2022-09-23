@@ -1,0 +1,45 @@
+CalculationMode = gs
+#CalculationMode = td
+FromScratch = yes
+
+Radius = 3.5*angstrom
+Spacing = 0.18*angstrom
+
+CH = 1.097*angstrom
+%Coordinates
+  "C" |           0 |          0 |           0
+  "H" |  CH/sqrt(3) | CH/sqrt(3) |  CH/sqrt(3)
+  "H" | -CH/sqrt(3) |-CH/sqrt(3) |  CH/sqrt(3)
+  "H" |  CH/sqrt(3) |-CH/sqrt(3) | -CH/sqrt(3)
+  "H" | -CH/sqrt(3) | CH/sqrt(3) | -CH/sqrt(3)
+%
+
+OutputDuringSCF = yes
+OutputInterval = 1
+OutputFormat = netcdf + vtk + xcrysden
+%Output
+  density
+  current
+%
+
+TDTimeStep = 0.05
+TDMaxSteps = 50
+
+amplitude = 1*eV/angstrom
+omega = 18.0*eV
+tau0 = 0.5/eV
+t0 = tau0
+
+%TDExternalFields
+  electric_field | 1 | 0 | 0 | omega | "envelope_cos"
+%
+
+%TDFunctions
+  "envelope_cos" | tdf_cosinoidal | amplitude | tau0 | t0
+%
+
+%TDOutput
+ multipoles
+ laser
+ energy
+%
