@@ -18,7 +18,7 @@ USER karnada
 
 # Build Octopus
 WORKDIR /home/karnada
-RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=11.4/octopus-11.4.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
+RUN wget -O oct.tar.gz https://octopus-code.org/down.php?file=12.0/octopus-12.0.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
 WORKDIR /home/karnada/octopus-11.4
 RUN autoreconf -i
 RUN ./configure
