@@ -1,2 +1,4 @@
 examples/*
+!examples/*/inp
+!examples/*/*/inp
 .ipynb_checkpoints/*
