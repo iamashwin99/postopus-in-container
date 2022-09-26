@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-# install Octopus 11.4 on Debian implimented from fangohr/octopus-in-spack
+# install Octopus 12.0 on Debian implimented from fangohr/octopus-in-spack
 
 ######### Octopus Setup #########
 # Convenience tools (up to emacs)
@@ -18,8 +18,8 @@ USER karnada
 
 # Build Octopus
 WORKDIR /home/karnada
-RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=11.4/octopus-11.4.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
-WORKDIR /home/karnada/octopus-11.4
+RUN wget -O oct.tar.gz https://octopus-code.org/down.php?file=12.0/octopus-12.0.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
+WORKDIR /home/karnada/octopus-12.0
 RUN autoreconf -i
 RUN ./configure
 
