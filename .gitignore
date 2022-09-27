@@ -2,3 +2,4 @@ examples/*
 !examples/*/inp
 !examples/*/*/inp
 .ipynb_checkpoints/*
+.vscode/launch.json
