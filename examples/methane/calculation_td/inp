@@ -16,7 +16,7 @@ CH = 1.097*angstrom
 
 OutputDuringSCF = yes
 OutputInterval = 1
-OutputFormat = netcdf + vtk + xcrysden
+OutputFormat = netcdf
 %Output
   density
   current

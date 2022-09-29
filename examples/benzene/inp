@@ -11,7 +11,7 @@ Spacing = 0.15*angstrom
   potential
 %
 
-OutputFormat = cube + xcrysden + dx + axis_x + plane_z + netcdf + vtk
+OutputFormat = cube
 
 XYZCoordinates = "benzene.xyz"
 
