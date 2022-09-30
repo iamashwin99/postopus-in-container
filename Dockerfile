@@ -63,5 +63,9 @@ USER karnada
 RUN pip install git+https://gitlab.com/octopus-code/postopus.git 
 RUN pip install "holoviews[recommended]"
 
+# CD to directory where we mount the host file system
+WORKDIR /home/karnada/io
+
 # RUN jupyter lab --LabApp.token='' --ip=${HOSTNAME} > /dev/null 2>&1 &  disown
+# use 'start-jupyter-lab.sh' script from inside container
 CMD bash -l
