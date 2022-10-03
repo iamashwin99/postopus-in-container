@@ -39,12 +39,12 @@ RUN octopus --version
 # RUN make check-short
 
 RUN mkdir -p /home/karnada/octopus-examples
-COPY --chown=karnada:cfel examples /home/karnada/octopus-examples
+COPY --chown=karnada:cfel examples /home/$USER/octopus-examples
 
 # Instead of tests, run two short examples
-RUN cd /home/karnada/octopus-examples/h-atom && octopus
-RUN cd /home/karnada/octopus-examples/he && octopus
-RUN cd /home/karnada/octopus-examples/recipe && octopus
+RUN cd /home/$USER/octopus-examples/h-atom && octopus
+RUN cd /home/$USER/octopus-examples/he && octopus
+RUN cd /home/$USER/octopus-examples/recipe && octopus
 
 ######### Postopus Setup #########
 USER root
