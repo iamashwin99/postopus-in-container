@@ -14,4 +14,4 @@ Spacing = 0.15*angstrom
 OutputFormat = cube
 
 XYZCoordinates = "benzene.xyz"
-
+FromScratch = yes
