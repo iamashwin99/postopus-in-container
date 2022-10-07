@@ -1,5 +1,5 @@
 .ipynb_checkpoints/*
-.vscode/launch.json
+.vscode/*
 # Ignore all ocotpus ocutputs
 *.obf
 *.ncdf
@@ -14,4 +14,3 @@
 examples/*/exec/*
 examples/*/restart/*
 examples/*/static/*
-
