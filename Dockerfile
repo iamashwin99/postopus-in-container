@@ -1,7 +1,9 @@
 FROM debian:bullseye
 
-# install Octopus 12.0 on Debian implimented from fangohr/octopus-in-spack
+
+# install Octopus 12.1 on Debian implimented from fangohr/octopus-in-spack
 ARG DOCKER_USER
+
 ######### Octopus Setup #########
 # Convenience tools (up to emacs)
 # Libraries that octopus needs (up to procps)
@@ -17,9 +19,11 @@ RUN useradd $DOCKER_USER --create-home --shell /bin/bash -g 3512 -u 52351
 USER $DOCKER_USER
 
 # Build Octopus
+
 WORKDIR /home/$DOCKER_USER
-RUN wget -O oct.tar.gz https://octopus-code.org/down.php?file=12.0/octopus-12.0.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
-WORKDIR /home/$DOCKER_USER/octopus-12.0
+RUN wget -O oct.tar.gz https://octopus-code.org/down.php?file=12.1/octopus-12.1.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
+WORKDIR /home/$DOCKER_USER/octopus-12.1
+
 RUN autoreconf -i
 RUN ./configure
 
