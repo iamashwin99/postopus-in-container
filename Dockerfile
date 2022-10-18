@@ -8,9 +8,39 @@ ARG DOCKER_USER
 # Convenience tools (up to emacs)
 # Libraries that octopus needs (up to procps)
 # and optional dependencies (starting from libnetcdf-dev)
-RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
-    autoconf libtool git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential procps \
-    libnetcdff-dev libetsf-io-dev libspfft-dev libnlopt-dev libyaml-dev libgmp-dev likwid libmpfr-dev libboost-dev \
+RUN apt-get -y update && apt-get -y install autoconf \ 
+    build-essential \
+    emacs \ 
+    g++ \ 
+    gcc \ 
+    gfortran \ 
+    git \ 
+    libatlas-base-dev  \
+    libblas-dev \ 
+    libboost-dev \ 
+    libcgal-dev \
+    libelpa-dev \
+    libetsf-io-dev \ 
+    libfftw3-dev \ 
+    libgmp-dev \ 
+    libgsl-dev \ 
+    liblapack-dev \ 
+    libmpfr-dev \ 
+    libnetcdff-dev \ 
+    libnlopt-dev \ 
+    libopenmpi-dev \
+    libscalapack-mpi-dev  \
+    libspfft-dev \ 
+    libtool \ 
+    libxc-dev \ 
+    libyaml-dev \ 
+    likwid \ 
+    nano \ 
+    pkg-config  \
+    procps \ 
+    time \ 
+    vim \ 
+    wget \ 
     && rm -rf /var/lib/apt/lists/*
 
 # Mimic the host uid and gid from host to container to enable write support to mounted volumes
@@ -25,7 +55,7 @@ RUN wget -O oct.tar.gz https://octopus-code.org/down.php?file=12.1/octopus-12.1.
 WORKDIR /home/$DOCKER_USER/octopus-12.1
 
 RUN autoreconf -i
-RUN ./configure
+RUN ./configure 
 
 # Which optional dependencies are missing?
 RUN cat config.log | grep WARN > octopus-configlog-warnings
