@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 
 # install Octopus 12.1 on Debian implimented from fangohr/octopus-in-spack
-ARG DOCKER_USER
+ARG DOCKER_USER=postopus
 
 ######### Octopus Setup #########
 # Convenience tools (up to emacs)
