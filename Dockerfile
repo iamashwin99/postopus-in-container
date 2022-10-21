@@ -82,20 +82,25 @@ RUN cd /home/$DOCKER_USER/octopus-examples/recipe && octopus
 
 ######### Postopus Setup #########
 USER root
-RUN apt-get -y update && apt-get -y install python3 python3-pip
+RUN apt-get -y update && apt-get -y install python3 \
+            python3-pip \
+            ffmpeg \
+            libsm6 \
+            libxext6 \
+            && rm -rf /var/lib/apt/lists/*  
+
 USER $DOCKER_USER
-RUN pip install jupyterlab
 EXPOSE 8888
 
 # Mount the host directory containing the  src as a volume in the container
 RUN mkdir -p /home/$DOCKER_USER/io
 USER root
 RUN chown -R $DOCKER_USER:cfel /home/$DOCKER_USER/io
-# required to solve ImportError: libGL.so.1: cannot open shared object file: No such file or directory
-RUN apt-get install ffmpeg libsm6 libxext6  -y  
+
 USER $DOCKER_USER
-RUN pip install git+https://gitlab.com/octopus-code/postopus.git 
-RUN pip install "holoviews[recommended]"
+RUN pip install --no-cache jupyterlab && \
+    pip install --no-cache git+https://gitlab.com/octopus-code/postopus.git && \
+    pip install --no-cache "holoviews[recommended]" 
 
 # CD to directory where we mount the host file system
 WORKDIR /home/$DOCKER_USER/io
